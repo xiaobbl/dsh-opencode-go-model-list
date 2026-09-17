@@ -1,3 +1,5 @@
+[![English](https://img.shields.io/badge/English-README-2ea44f?style=for-the-badge)](README.md) [![简体中文](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-README-6e7681?style=for-the-badge)](README.zh.md)
+
 # dsh-opencode-go-model-list
 
 Keeps the harness's **own** `opencode-go` provider route on the model list opencode Go actually serves — no second provider, no `settings.yaml` edits, no credential handling, and no shipped model overwritten.

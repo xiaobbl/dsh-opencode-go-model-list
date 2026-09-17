@@ -1,3 +1,5 @@
+[![English](https://img.shields.io/badge/English-README-6e7681?style=for-the-badge)](README.md) [![简体中文](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-README-0969da?style=for-the-badge)](README.zh.md)
+
 # 作者的话
 
 纯vibe-coding出来的，解决了DSH的opencode-go模型列表落后实际的问题。  
