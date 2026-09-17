@@ -1,0 +1,10 @@
+{
+  "name": "dsh-model-list-probe",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  }
+}

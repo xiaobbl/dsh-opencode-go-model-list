@@ -1,0 +1,41 @@
+{
+  "name": "dsh-opencode-go-model-list",
+  "version": "0.1.0",
+  "description": "Serve the live opencode Go model catalog from the harness's own built-in opencode-go provider route.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.3"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "opencode",
+    "opencode-go",
+    "cordis",
+    "plugin",
+    "models",
+    "catalog"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/",
+    "test:in-process": "node test/all.mjs"
+  },
+  "private": false
+}

@@ -1,0 +1,36 @@
+# dsh-opencode-go-model-list — keep the harness's own `opencode-go` route on the
+# live opencode Go model list.
+#
+# One insert over the empty profile root. The plugin contributes models to the
+# pi-ai catalog that `@deepseek-ai/dsh-llm-pi-ai` already serves for the
+# `opencode-go` route: it never registers a provider of its own, never writes
+# settings, and never touches credentials. A model it adds is indistinguishable
+# from one the shipped catalog carries — same route, same auth, same endpoint,
+# same wire compat.
+#
+# Sources, in order of authority:
+#   * GET https://opencode.ai/zen/go/v1/models  — which models the plan serves
+#   * GET https://models.dev/api.json           — limits, modalities, cost
+# A model the gateway serves but models.dev does not describe yet is cloned from
+# its nearest shipped sibling, so it is usable the day it appears.
+#
+# All configuration is optional; the defaults below are shown for reference.
+
+- insert:
+    - id: opencode-go-model-list
+      name: 'dsh-opencode-go-model-list'
+      # config:
+      #   provider: opencode-go                                   # route to extend
+      #   gatewayUrl: https://opencode.ai/zen/go/v1/models        # served-model list
+      #   catalogUrl: https://models.dev/api.json                 # metadata
+      #   refreshIntervalMs: 21600000                             # 6h; 0 = start-up only
+      #   timeoutMs: 15000
+      #   offline: false                                          # cache only, no network
+      #   includeDeprecated: true
+      #   defaultApi: openai-completions
+      #   updateExisting: false                                   # never rewrite shipped entries
+      #   patchCollection: true                                   # live view, no restart needed
+      #   cachePath: ''                                           # default: $DSH_HOME/cache/opencode-go-model-list/catalog.json
+      #   extraModelIds: []                                       # ids to add besides the fetched ones
+      #   models: {}                                              # per-model overrides, keyed by id
+      #   verbose: false
