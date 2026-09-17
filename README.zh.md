@@ -1,7 +1,7 @@
 # 作者的话
 
-纯vibe-coding出来的，解决了DSH的opencode-go模型列表落后实际的问题。
-安装之后更新列表需要删除opencode-go提供商后再重新配置。
+纯vibe-coding出来的，解决了DSH的opencode-go模型列表落后实际的问题。  
+安装之后更新列表需要删除opencode-go提供商后再重新配置。  
 有问题可以提交issue，虽然我不一定会修（误
 
 # dsh-opencode-go-model-list
