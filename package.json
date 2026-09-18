@@ -15,6 +15,15 @@
     "README.zh.md"
   ],
   "license": "MIT",
+  "author": "xiaobbl",
+  "homepage": "https://github.com/xiaobbl/dsh-opencode-go-model-list#readme",
+  "bugs": {
+    "url": "https://github.com/xiaobbl/dsh-opencode-go-model-list/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaobbl/dsh-opencode-go-model-list.git"
+  },
   "engines": {
     "node": ">=20.3"
   },
