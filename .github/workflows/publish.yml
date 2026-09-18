@@ -1,0 +1,64 @@
+# Publishes this package to npm from GitHub, with a provenance attestation that
+# ties the published tarball to this repository and this commit.
+#
+# Authentication is npm Trusted Publishing (OIDC), so no NPM_TOKEN secret exists
+# to leak or rotate: GitHub mints a short-lived OIDC token for this run and npm
+# exchanges it for a one-time publish credential.
+#
+# Configure it once on the package's npm access page:
+#   https://www.npmjs.com/package/dsh-opencode-go-model-list/access
+#     Provider              GitHub Actions
+#     Organization or user  xiaobbl
+#     Repository            dsh-opencode-go-model-list
+#     Workflow filename     publish.yml
+#     Allowed actions       enable "npm publish"
+#
+# Until that entry exists the publish step fails: npm only accepts the OIDC
+# token for a repository and workflow it has been told to trust, and a newly
+# created trusted publisher allows only staged publishing by default.
+name: publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          # A release build never reuses a cached dependency tree.
+          package-manager-cache: false
+
+      # The tag is the release identity, so package.json has to agree with it.
+      - name: Check that the tag matches package.json
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} does not match package.json version ${pkg}"
+            exit 1
+          fi
+
+      # No `npm ci`: the package has no dependencies and ships no lockfile.
+      # `node --test` rather than `npm test`, whose directory argument Node 24
+      # resolves as a module and fails; the suite skips the tests that need a
+      # local pi-ai installation, which a CI runner does not have.
+      - name: Test
+        run: node --test
+
+      - name: Publish
+        run: npm publish --provenance
